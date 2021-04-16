@@ -37,3 +37,46 @@ npm run watch
 ```
 
 Nb : 2 terminaux ouverts en même temps, 1 avec php artisan serve et 1 autre avec npm run watch
+
+Créer une migration
+```
+php artisan make:migration create_properties_table
+```
+=> création d'un nouveau fichier dans database/migrations à la date de création. Commande pour lancer l'exécution de la migration. 
+```
+php artisan migrate
+```
+Relancer la migration (si erreur)
+//Nb : attention à créer la table en InnoDB =/= MyISAM et en utf8mb4_general_ci
+```
+php artisan migrate:fresh
+```
+
+Lancer des scripts :
+```
+php artisan db:seed
+```
+Pour remettre à 0 la base et relancer les scripts :
+```
+php artisan migrate:fresh --seed
+```
+
+Récupérer la page 404 :
+- soit on crée une 404 pour écraser la page par défaut
+- soit on utilise la commande qui copiera le dossier des erreurs dans ressources/views/errors
+```
+php artisan vendor:publish --tag=laravel-errors
+```
+Nb : si on utilise la page illustrated-layout, il faut ajouter un dossier img dans /public  et on ajoute dans illustrated-layout-blade :
+```
+@section('image')
+    <img class=""...>
+@endsection
+```
+
+Créer des contrôleurs :
+```
+php artisan make:controller PropertyController
+```
+-> création d'un dossier Controllers dans app/Http
+-> 1 méthode = 1 route

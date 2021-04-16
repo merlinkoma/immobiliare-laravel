@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\PropertyController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +39,17 @@ Route::get('/hello/{firstname?}', function ($firstname = "Merlin"){
  return "<h1>Hello $firstname</h1>";
 })->where('firstname', '.{2,}');
 //->where(...) = regex qui demande au moins 2 caractères ("." : n'importe quel caractère)
+
+//Route permettant d'afficher les annonces
+Route::get('/nos-annonces', [PropertyController::class, 'index']);
+
+//Voir une annonce
+Route::get('/annonce/{id}', [PropertyController::class, 'show'])->whereNumber('id'); //permet de forcer un nombre en paramètre et dene pas avoir de problème avec la route du dessous annonce/creer (sinon creer est compris comme étant l'id)
+
+//Route en GET
+Route::get('/annonce/creer', [PropertyController::class, 'create']);
+//1er param du tableau : nom de la classe utilisée, 2e : action appelée (ici = function create)
+
+//Route en POST
+//! use Illuminate/Http/Request;
+Route::post('/annonce/creer', [PropertyController::class, 'store']);
