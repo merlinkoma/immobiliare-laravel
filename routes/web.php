@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PropertyController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -44,7 +45,7 @@ Route::get('/hello/{firstname?}', function ($firstname = "Merlin"){
 Route::get('/nos-annonces', [PropertyController::class, 'index']);
 
 //Voir une annonce
-Route::get('/annonce/{id}', [PropertyController::class, 'show'])->whereNumber('id'); //permet de forcer un nombre en paramètre et dene pas avoir de problème avec la route du dessous annonce/creer (sinon creer est compris comme étant l'id)
+Route::get('/annonce/{property}', [PropertyController::class, 'show'])->whereNumber('property'); //permet de forcer un nombre en paramètre et dene pas avoir de problème avec la route du dessous annonce/creer (sinon creer est compris comme étant l'id)
 
 //Route en GET
 Route::get('/annonce/creer', [PropertyController::class, 'create']);
@@ -53,3 +54,13 @@ Route::get('/annonce/creer', [PropertyController::class, 'create']);
 //Route en POST
 //! use Illuminate/Http/Request;
 Route::post('/annonce/creer', [PropertyController::class, 'store']);
+
+//Editer une annonce
+Route::get('/annonce/editer/{id}', [PropertyController::class, 'edit']);
+Route::put('/annonce/editer/{id}', [PropertyController::class, 'update']);
+//Méthode put() : distinction de la création et de la modificationd'un objet. On pourrait utiliser un post() mais plus propre avec put()
+
+Route::delete('annonce/{id}', [PropertyController::class, 'destroy']);
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -27,7 +27,7 @@
         {{-- FORMULAIRE EN POST --}}
         <h2>Formulaire en POST</h2>
         {{-- Nb : l'action est ici renseignée pour l'exemple mais avec la valeur par défaut --}}
-        <form action="/annonce/creer" class="my-2" method="post">
+        <form action="/annonce/creer" class="my-2" method="post" enctype="multipart/form-data">
             @csrf
             {{-- envoi un token dans la session à chaque requête pour éviter les failles csrf 
             Equivaut à un input de type hidden avec un name="_token" et value"..."
@@ -39,6 +39,11 @@
                 @error('title')
                     <span class="form-control alert alert-danger">{{$message}}</span>
                 @enderror
+            </div>
+
+            <div>
+                <label for="image" class="form-label">Image</label>
+                <input type="file" name="image" id="image" class="form-control">
             </div>
 
             <div>

@@ -1,0 +1,22 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+$bgc : rgb(144, 207, 197);
+$col : rgb(8, 8, 8);
+$linkcol : rgb(16, 75, 122);
+
+body{
+    background-color: $bgc;
+    color: $col;
+    a{
+        color: $linkcol;
+        text-decoration: none;
+        font-weight: 700;
+    }
+}

@@ -31,6 +31,14 @@ dans le dossier du projet :
 npm install
 ```
 Pour le css, on renomme le app.css en app.scss et à aussi modifier dans le fichier webpack.mix.js
+
+dans webpack ->
+```
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/css/app.scss', 'public/css')
+    .browserSync('localhost:8000');
+```
+
 Ensuite (à lancer 2x s'il doit retélécharger des dépendances) :
 ```
 npm run watch
@@ -80,3 +88,20 @@ php artisan make:controller PropertyController
 ```
 -> création d'un dossier Controllers dans app/Http
 -> 1 méthode = 1 route
+
+Pour afficher les images, création du lien symbolique du dossier public au dossier storage (dans storage : les images qui ne sont pas de la "déco")
+```
+php artisan storage:link
+```
+
+Créer un modèle :
+Le nom du modèle correspond au nom de la table mais au singulier
+```
+php artisan make:model Nomdumodele
+```
+Laravel gère les liens entre Property et Properties
+
+Factory = class qui permet de générer des données aléatoires.
+```
+php artisan make:factory PropertyFactory
+```
